@@ -11,9 +11,6 @@
   <!-- Importa a fonte Lora -->
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   
-  <!-- Inclui a biblioteca Tabletop.js via jsDelivr -->
-  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.1/dist/tabletop.min.js"></script>
-  
   <style>
     /* Reset básico */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,10 +53,7 @@
       background-color: #0056b3;
     }
     
-    /* Contêiner onde o catálogo será inserido */
-    #catalogContainer { margin-top: 80px; }
-    
-    /* Cada família de produtos */
+    /* Seção de cada família de produtos */
     .family-section {
       margin-bottom: 40px;
       overflow-x: auto;
@@ -72,14 +66,14 @@
       padding-left: 10px;
     }
     
-    /* Container de produtos: grid de 6 colunas */
+    /* Container de produtos organizado em grid de 6 colunas */
     .product-container {
       display: grid;
       grid-template-columns: repeat(6, 250px);
       gap: 20px;
     }
     
-    /* Card de produto */
+    /* Cada produto (card) */
     .product-card {
       background-color: #f8f8f8;
       padding: 10px;
@@ -97,8 +91,15 @@
       object-fit: cover;
       border-radius: 8px;
     }
-    .product-name { font-size: 1.1em; margin-bottom: 5px; }
-    .product-price { font-size: 1em; font-weight: bold; margin-bottom: 5px; }
+    .product-name {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+    .product-price {
+      font-size: 1em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
     .product-qty {
       width: 80px;
       padding: 5px;
@@ -116,7 +117,9 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .add-to-cart:hover { background-color: #ddd; }
+    .add-to-cart:hover {
+      background-color: #ddd;
+    }
     .add-to-cart i {
       font-size: 1.2em;
       color: #111; /* Estado original */
@@ -125,7 +128,9 @@
     
     /* Responsividade: para telas menores, a grid terá 2 colunas */
     @media (max-width: 600px) {
-      .product-container { grid-template-columns: repeat(2, 200px); }
+      .product-container {
+        grid-template-columns: repeat(2, 200px);
+      }
     }
   </style>
 </head>
@@ -137,101 +142,157 @@
   
   <h1>Catálogo de Produtos</h1>
   
-  <!-- Contêiner onde o catálogo será gerado dinamicamente -->
-  <div id="catalogContainer"></div>
+  <!-- Família 1: ANILHA SPORT PINTADA -->
+  <div class="family-section">
+    <div class="family-title">ANILHA SPORT PINTADA</div>
+    <div class="product-container">
+      <div class="product-card" data-name="ANILHA SPORT PINTADA1" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA1.jpg" alt="ANILHA SPORT PINTADA1" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA1</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT PINTADA2" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA2.jpg" alt="ANILHA SPORT PINTADA2" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA2</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT PINTADA3" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA3.jpg" alt="ANILHA SPORT PINTADA3" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA3</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT PINTADA4" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA4.jpg" alt="ANILHA SPORT PINTADA4" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA4</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT PINTADA 5 KG" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA5.jpg" alt="ANILHA SPORT PINTADA 5 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA 5 KG</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT PINTADA 10 KG" data-price="10.00">
+        <img src="ANILHA SPORT PINTADA10.jpg" alt="ANILHA SPORT PINTADA 10 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT PINTADA 10 KG</p>
+        <p class="product-price">R$10,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Família 2: ANILHA SPORT EMBORRACHADA -->
+  <div class="family-section">
+    <div class="family-title">ANILHA SPORT EMBORRACHADA</div>
+    <div class="product-container">
+      <div class="product-card" data-name="ANILHA SPORT EMBORRACHADA 1 KG" data-price="12.00">
+        <img src="ANILHA SPORT EMBORRACHADA1.jpg" alt="ANILHA SPORT EMBORRACHADA 1 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT EMBORRACHADA 1 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT EMBORRACHADA 2 KG" data-price="12.00">
+        <img src="ANILHA SPORT EMBORRACHADA2.jpg" alt="ANILHA SPORT EMBORRACHADA 2 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT EMBORRACHADA 2 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT EMBORRACHADA 3 KG" data-price="12.00">
+        <img src="ANILHA SPORT EMBORRACHADA3.jpg" alt="ANILHA SPORT EMBORRACHADA 3 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT EMBORRACHADA 3 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA SPORT EMBORRACHADA 4 KG" data-price="12.00">
+        <img src="ANILHA SPORT EMBORRACHADA4.jpg" alt="ANILHA SPORT EMBORRACHADA 4 KG" class="product-image">
+        <p class="product-name">ANILHA SPORT EMBORRACHADA 4 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Família 3: ANILHA VAZADA EMBORRACHADA -->
+  <div class="family-section">
+    <div class="family-title">ANILHA VAZADA EMBORRACHADA</div>
+    <div class="product-container">
+      <div class="product-card" data-name="ANILHA VAZADA EMBORRACHADA 1 KG" data-price="12.00">
+        <img src="ANILHA VAZADA EMBORRACHADA1.jpg" alt="ANILHA VAZADA EMBORRACHADA 1 KG" class="product-image">
+        <p class="product-name">ANILHA VAZADA EMBORRACHADA 1 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA VAZADA EMBORRACHADA 2 KG" data-price="12.00">
+        <img src="ANILHA VAZADA EMBORRACHADA2.jpg" alt="ANILHA VAZADA EMBORRACHADA 2 KG" class="product-image">
+        <p class="product-name">ANILHA VAZADA EMBORRACHADA 2 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA VAZADA EMBORRACHADA 3 KG" data-price="12.00">
+        <img src="ANILHA VAZADA EMBORRACHADA3.jpg" alt="ANILHA VAZADA EMBORRACHADA 3 KG" class="product-image">
+        <p class="product-name">ANILHA VAZADA EMBORRACHADA 3 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+      <div class="product-card" data-name="ANILHA VAZADA EMBORRACHADA 4 KG" data-price="12.00">
+        <img src="ANILHA VAZADA EMBORRACHADA4.jpg" alt="ANILHA VAZADA EMBORRACHADA 4 KG" class="product-image">
+        <p class="product-name">ANILHA VAZADA EMBORRACHADA 4 KG</p>
+        <p class="product-price">R$12,00</p>
+        <input type="number" class="product-qty" min="0" value="0">
+        <button class="add-to-cart" onclick="toggleCart(this)">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+    </div>
+  </div>
   
   <script>
-    // Inicializa o Tabletop.js ao carregar o DOM
-    window.addEventListener('DOMContentLoaded', init);
+    // NÃO limpamos o carrinho ao carregar a página para preservar itens adicionados se o usuário voltar da sacola.
     
-    function init() {
-      Tabletop.init({
-        key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpTc377MDGsJM5iHTE0x43EfRuBi7iE_LeL0QV2P6z4FPEBmlxilQk1KxE5Ql5Ei6OVtYusKyDdzNf/pubhtml',
-        callback: showData,
-        simpleSheet: true
-      });
-    }
-    
-    // Função para agrupar os produtos por família e montar o catálogo
-    function showData(data) {
-      console.log("Dados carregados:", data);
-      let families = {};
-      data.forEach(item => {
-        let family = item["Family"]; // Certifique-se de que o cabeçalho na planilha se chama "Family"
-        if (!families[family]) {
-          families[family] = [];
-        }
-        families[family].push(item);
-      });
-      
-      let catalogContainer = document.getElementById('catalogContainer');
-      catalogContainer.innerHTML = "";
-      
-      for (let family in families) {
-        // Cria a seção da família
-        let familySection = document.createElement('div');
-        familySection.className = 'family-section';
-        
-        let familyTitle = document.createElement('div');
-        familyTitle.className = 'family-title';
-        familyTitle.textContent = family;
-        familySection.appendChild(familyTitle);
-        
-        // Cria o container de produtos (grid de 6 colunas)
-        let productContainer = document.createElement('div');
-        productContainer.className = 'product-container';
-        
-        families[family].forEach(product => {
-          let productCard = document.createElement('div');
-          productCard.className = 'product-card';
-          productCard.setAttribute('data-name', product["Product Name"]);
-          productCard.setAttribute('data-price', product["Price"]);
-          
-          // Cria o elemento de imagem
-          let img = document.createElement('img');
-          img.className = 'product-image';
-          img.src = product["Image"];
-          img.alt = product["Product Name"];
-          productCard.appendChild(img);
-          
-          // Nome do produto
-          let nameP = document.createElement('p');
-          nameP.className = 'product-name';
-          nameP.textContent = product["Product Name"];
-          productCard.appendChild(nameP);
-          
-          // Preço do produto
-          let priceP = document.createElement('p');
-          priceP.className = 'product-price';
-          priceP.textContent = 'R$' + product["Price"];
-          productCard.appendChild(priceP);
-          
-          // Campo de quantidade
-          let qtyInput = document.createElement('input');
-          qtyInput.type = 'number';
-          qtyInput.className = 'product-qty';
-          qtyInput.min = '0';
-          qtyInput.value = '0';
-          productCard.appendChild(qtyInput);
-          
-          // Botão de adicionar/remover (toggle) do carrinho
-          let addButton = document.createElement('button');
-          addButton.className = 'add-to-cart';
-          addButton.onclick = function() { toggleCart(this); };
-          let icon = document.createElement('i');
-          icon.className = 'fas fa-shopping-bag';
-          addButton.appendChild(icon);
-          productCard.appendChild(addButton);
-          
-          productContainer.appendChild(productCard);
-        });
-        
-        familySection.appendChild(productContainer);
-        catalogContainer.appendChild(familySection);
-      }
-    }
-    
-    // Função toggle para adicionar ou remover um produto do carrinho
+    // Função de toggle para adicionar ou remover o produto do carrinho
     function toggleCart(btn) {
       const card = btn.parentElement;
       const productName = card.getAttribute('data-name');
@@ -242,8 +303,7 @@
       const index = cart.findIndex(item => item.name === productName);
       
       if (index !== -1) {
-        // Se o item já está no carrinho:
-        // Se a nova quantidade for maior que 0, soma à existente; se for 0, remove o item.
+        // Produto já existe no carrinho: se a quantidade for maior que 0, soma; se for 0, remove.
         if (productQty > 0) {
           cart[index].qty += productQty;
           cart[index].total = cart[index].price * cart[index].qty;
@@ -275,4 +335,5 @@
   </script>
 </body>
 </html>
+
 
