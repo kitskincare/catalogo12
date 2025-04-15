@@ -11,8 +11,8 @@
   <!-- Importa a fonte Lora -->
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   
-  <!-- Inclui a biblioteca Tabletop.js via unpkg -->
-  <script src="https://unpkg.com/tabletop@1.5.1/dist/tabletop.min.js"></script>
+  <!-- Inclui a biblioteca Tabletop.js via jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.1/dist/tabletop.min.js"></script>
   
   <style>
     /* Reset básico */
@@ -24,7 +24,7 @@
       color: #000;
       padding: 20px;
       min-height: 100vh;
-      position: relative; /* Para posicionar o botão flutuante */
+      position: relative; /* Para o botão flutuante */
     }
     
     h1 {
@@ -52,14 +52,12 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       transition: background-color 0.3s ease;
     }
-    #floatingSacola:hover {
-      background-color: #0056b3;
-    }
+    #floatingSacola:hover { background-color: #0056b3; }
     
     /* Contêiner onde o catálogo será inserido */
     #catalogContainer { margin-top: 80px; }
     
-    /* Estilos para cada família de produtos */
+    /* Cada família de produtos */
     .family-section {
       margin-bottom: 40px;
       overflow-x: auto;
@@ -125,7 +123,9 @@
     
     /* Responsividade: para telas menores, a grid terá 2 colunas */
     @media (max-width: 600px) {
-      .product-container { grid-template-columns: repeat(2, 200px); }
+      .product-container {
+        grid-template-columns: repeat(2, 200px);
+      }
     }
   </style>
 </head>
@@ -153,6 +153,8 @@
     function showData(data) {
       console.log("Dados carregados:", data);
       let families = {};
+      
+      // Agrupa os produtos pela coluna "Family"
       data.forEach(item => {
         let family = item["Family"];
         if (!families[family]) {
@@ -164,6 +166,7 @@
       let catalogContainer = document.getElementById('catalogContainer');
       catalogContainer.innerHTML = "";
       
+      // Para cada família, cria uma seção com título e grid de produtos
       for (let family in families) {
         let familySection = document.createElement('div');
         familySection.className = 'family-section';
@@ -182,22 +185,26 @@
           productCard.setAttribute('data-name', product["Product Name"]);
           productCard.setAttribute('data-price', product["Price"]);
           
+          // Imagem
           let img = document.createElement('img');
           img.className = 'product-image';
           img.src = product["Image"];
           img.alt = product["Product Name"];
           productCard.appendChild(img);
           
+          // Nome
           let nameP = document.createElement('p');
           nameP.className = 'product-name';
           nameP.textContent = product["Product Name"];
           productCard.appendChild(nameP);
           
+          // Preço
           let priceP = document.createElement('p');
           priceP.className = 'product-price';
           priceP.textContent = 'R$' + product["Price"];
           productCard.appendChild(priceP);
           
+          // Campo de quantidade
           let qtyInput = document.createElement('input');
           qtyInput.type = 'number';
           qtyInput.className = 'product-qty';
@@ -205,6 +212,7 @@
           qtyInput.value = '0';
           productCard.appendChild(qtyInput);
           
+          // Botão de toggle
           let addButton = document.createElement('button');
           addButton.className = 'add-to-cart';
           addButton.onclick = function() { toggleCart(this); };
