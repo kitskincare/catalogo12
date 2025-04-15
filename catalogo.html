@@ -7,16 +7,19 @@
   
   <!-- Importa Font Awesome para os ícones -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" />
-  
   <!-- Importa a fonte Lora -->
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
   
-  <!-- Inclui a biblioteca Tabletop.js via jsDelivr -->
-  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.1/dist/tabletop.min.js"></script>
+  <!-- Inclui a biblioteca Tabletop.js via unpkg -->
+  <script src="https://unpkg.com/tabletop@1.5.1/dist/tabletop.min.js"></script>
   
   <style>
     /* Reset básico */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     
     body {
       font-family: 'Lora', serif;
@@ -24,7 +27,7 @@
       color: #000;
       padding: 20px;
       min-height: 100vh;
-      position: relative; /* Para o botão flutuante */
+      position: relative; /* Para posicionar o botão flutuante */
     }
     
     h1 {
@@ -52,10 +55,14 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       transition: background-color 0.3s ease;
     }
-    #floatingSacola:hover { background-color: #0056b3; }
+    #floatingSacola:hover {
+      background-color: #0056b3;
+    }
     
     /* Contêiner onde o catálogo será inserido */
-    #catalogContainer { margin-top: 80px; }
+    #catalogContainer {
+      margin-top: 80px;
+    }
     
     /* Cada família de produtos */
     .family-section {
@@ -70,14 +77,14 @@
       padding-left: 10px;
     }
     
-    /* Container de produtos: grid de 6 colunas */
+    /* Container de produtos em grid – 6 colunas (se o espaço permitir) */
     .product-container {
       display: grid;
       grid-template-columns: repeat(6, 250px);
       gap: 20px;
     }
     
-    /* Cada produto (card) */
+    /* Estilos para cada card de produto */
     .product-card {
       background-color: #f8f8f8;
       padding: 10px;
@@ -89,14 +96,25 @@
       align-items: center;
       gap: 8px;
     }
+    
     .product-image {
       width: 150px;
       height: 150px;
       object-fit: cover;
       border-radius: 8px;
     }
-    .product-name { font-size: 1.1em; margin-bottom: 5px; }
-    .product-price { font-size: 1em; font-weight: bold; margin-bottom: 5px; }
+    
+    .product-name {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+    
+    .product-price {
+      font-size: 1em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
     .product-qty {
       width: 80px;
       padding: 5px;
@@ -114,7 +132,10 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .add-to-cart:hover { background-color: #ddd; }
+    .add-to-cart:hover {
+      background-color: #ddd;
+    }
+    
     .add-to-cart i {
       font-size: 1.2em;
       color: #111; /* Estado original */
@@ -140,21 +161,24 @@
   <div id="catalogContainer"></div>
   
   <script>
+    // Inicializa o Tabletop.js quando o DOM estiver carregado
     window.addEventListener('DOMContentLoaded', init);
     
     function init() {
       Tabletop.init({
+        // URL da sua planilha publicada. Certifique-se de que ela está publicada para a web.
         key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSwf7HWo2O-0kdzvs_uBCR4pR44mDQ8VwFsHnPE1TOP1PDZomm_YA1Lu-crCj-xE38UQPyMHMnooOtO/pubhtml',
         callback: showData,
         simpleSheet: true
       });
     }
     
+    // Função para agrupar os produtos por família e montar o catálogo
     function showData(data) {
       console.log("Dados carregados:", data);
-      let families = {};
       
       // Agrupa os produtos pela coluna "Family"
+      let families = {};
       data.forEach(item => {
         let family = item["Family"];
         if (!families[family]) {
@@ -185,20 +209,20 @@
           productCard.setAttribute('data-name', product["Product Name"]);
           productCard.setAttribute('data-price', product["Price"]);
           
-          // Imagem
+          // Imagem do produto
           let img = document.createElement('img');
           img.className = 'product-image';
-          img.src = product["Image"];
+          img.src = product["Image"];  // Exemplo: "ANILHA SPORT PINTADA1.jpg"
           img.alt = product["Product Name"];
           productCard.appendChild(img);
           
-          // Nome
+          // Nome do produto
           let nameP = document.createElement('p');
           nameP.className = 'product-name';
           nameP.textContent = product["Product Name"];
           productCard.appendChild(nameP);
           
-          // Preço
+          // Preço do produto
           let priceP = document.createElement('p');
           priceP.className = 'product-price';
           priceP.textContent = 'R$' + product["Price"];
@@ -212,7 +236,7 @@
           qtyInput.value = '0';
           productCard.appendChild(qtyInput);
           
-          // Botão de toggle
+          // Botão de toggle para adicionar/remover produto do carrinho
           let addButton = document.createElement('button');
           addButton.className = 'add-to-cart';
           addButton.onclick = function() { toggleCart(this); };
@@ -229,6 +253,7 @@
       }
     }
     
+    // Função de toggle para adicionar ou remover o produto do carrinho (usando localStorage)
     function toggleCart(btn) {
       const card = btn.parentElement;
       const productName = card.getAttribute('data-name');
@@ -239,6 +264,7 @@
       const index = cart.findIndex(item => item.name === productName);
       
       if (index !== -1) {
+        // Se o produto já está no carrinho:
         if (productQty > 0) {
           cart[index].qty += productQty;
           cart[index].total = cart[index].price * cart[index].qty;
